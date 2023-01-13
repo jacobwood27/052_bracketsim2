@@ -1,0 +1,67 @@
+body {padding: 50px; font-family: sans-serif;}
+table, th, td {border: 1px solid #000; border-collapse: collapse;}
+th, td {padding: 8px;}
+th {text-transform: capitalize;}
+button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: bold; text-transform: capitalize;font-size: 18px;}
+#newfriend {text-align: center; font-weight: bold; background-color: rgb(199, 177, 206)}
+#newfriend:hover {cursor: pointer; background-color: grey; color: #fff;}
+#newstrat {text-align: center; font-weight: bold; background-color: rgb(215, 252, 220);}
+#newstrat:hover {cursor: pointer; background-color: grey; color: #fff;}
+#number {width: 3em;}
+.strattable td{padding: 4px; font-size: 12px;}
+.strattable th{padding: 4px; font-size: 12px;}
+.wincss {background-color: rgb(150, 214, 150); text-align: center; font-weight: bold; cursor: pointer;}
+.losecss {background-color: rgb(233, 156, 156); text-align: center; cursor: pointer;}
+.unkcss {background-color: rgb(230, 230, 230); text-align: center; cursor: pointer;}
+.friend_head {text-align: center; font-weight: bold;}
+.game_d {text-align: center; font-weight: bold;}
+
+.border-less {
+    border-top: 1px solid #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+}
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 36rem;
+    border-radius: 0.5rem;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}

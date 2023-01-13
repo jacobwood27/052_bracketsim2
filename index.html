@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+
+<body onload="document.getElementById('newfriend').click(); document.getElementById('helpButton').click()">
+
+    
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>About</h2>
+            There are 8192 different ways to fill out an NFL playoff bracket. This tool helps you guess how your friends will fill out their bracket so you can pick a bracket that exploits their shortcomings and give you the highest probability of winning. 
+
+            <h3>Assumptions</h3>
+            <details>
+                <summary>Scoring</summary>
+                Scoring is hardcoded as:
+                <li>1 point - correct wildcard round winner</li>
+                <li>2 point - correct divisional round winner</li>
+                <li>4 point - correct conference round winner</li>
+                <li>8 point - correct superbowl winner</li>
+            </details>
+            <details>
+                <summary>Game Outcomes</summary>
+                Game outcomes are modeled using <a href="https://projects.fivethirtyeight.com/2022-nfl-predictions/">FivethirtyEight's QB adjusted ELO rankings</a>. See their methodology <a href="https://fivethirtyeight.com/methodology/how-our-nfl-predictions-work/">here</a>. The ELO values used were pulled on January 12, 2023.
+            </details>
+
+            <h2>How to</h2>
+            <h3>Step 1 - Model Friends</h3>
+            Take a stab at modeling your friends' selection strategies you expect them to follow while completing their brackets. 
+            Each friend can be modeled as a linear combination of the following pre-set strategies. 
+            <details>
+                <summary>Random</summary>
+                Your friend cannot be modeled. 
+                She flips a coin on every decision, so all 8192 brackets are equally likely.
+            </details>
+            <details>
+                <summary>Chalk</summary>
+                The favorite is picked in each matchup. 
+                All the probability mass ends up assigned to the most likely branch (branch 129, to be precise).
+            </details>
+            <details>
+                <summary>Pick Underdog</summary>
+                Your friend likes to mix it up, but rather predictably. 
+                They decide in advance how many games (out of 13) they are going to go with the underdog.
+                This is operationalized by giving the underdog in each game an x/13 chance of being selected. 
+            </details>
+            <details>
+                <summary>Favorite Team</summary>
+                Your friend is for sure going to pick team x to go all the way. 
+                For all games that do not involve team x they apply the Extremify algorithm (see below) to make their picks.
+            </details>
+            <details>
+                <summary>Tossup</summary>
+                Your friend decides some games are too close to call, so they flip a coin. 
+                The tossup games are identified with the parameter x.
+                If the probability of a team winning is within the range [0.5-x, 0.5+x], they will pick randomly.
+                Otherwise, they will pick the favorite.
+
+            </details>
+            <details>
+                <summary>Extremify</summary>
+                Your friend looks at the odds, and let's them influence him (either a lot or a little).
+                Probability of picking a team is an <a href="https://faculty.wharton.upenn.edu/wp-content/uploads/2015/07/2015---two-reasons-to-make-aggregated-probability-forecasts_1.pdf">extremified version</a> of the probability of team winning through the equation  P_pick = (P_win^x) / (P_win^x + (1 - P_win)^x). 
+                Values greater than 1 mean more likely to pick the favorite, values less than 1 mean less likely to pick the favorite.
+                For example, if a team is 65% likely to win they are:
+                <li>x = 0.5; 58% likely to pick them</li>
+                <li>x = 1.0; 65% likely to pick them</li>
+                <li>x = 2.0; 78% likely to pick them</li>
+            </details>
+            <h3>Step 2 - Calculate</h3>
+            The tool will take some time to model all of the possible ways your friends will fill out their brackets, all the possible brackets you could pick, and all the possible ways the games might actually play out. It will then show you the 5 best brackets with the highest probability of winning outright (ties are not considered a win). 
+            <h3>Step 3 - Implement</h3>
+            Pick the bracket you feel best about and use it at your own peril! Feel free to click around to change the brackets up and see what the repurcussions are.
+
+            <br></br>
+            <br></br>
+            Note: This site is not well written. Things probably won't work if you click while the calculations are running.
+        </div>
+    </div>
+
+    <table id="stratTable">
+        <tr>
+            <th>Friend</th>
+            <th title="Strategy you expect your friend to use when selecting a bracket">Selection Strategy</th>
+        </tr>
+        <tr>
+            <td id="newfriend" colspan="2" onClick="addFriend(this)">Add Friend</td>
+        </tr>
+    </table>
+
+    <br />
+    <button onclick="dowork()" id="calcButton">Calculate Best Options</button> <button class="trigger" id="helpButton">Help</button>
+
+    <br /><br />
+
+    <table id="likely_brackets">
+        <tr>
+            <th class="border-less"></th>
+            <th colspan="2" class="friend_head">Option 1</th>
+            <th colspan="2" class="friend_head">Option 2</th>
+            <th colspan="2" class="friend_head">Option 3</th>
+            <th colspan="2" class="friend_head">Option 4</th>
+            <th colspan="2" class="friend_head">Option 5</th>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,0)"></td><td onClick="cg(1,0)"></td><td onClick="cg(2,0)"></td><td onClick="cg(3,0)"></td><td onClick="cg(4,0)"></td><td onClick="cg(5,0)"></td><td onClick="cg(6,0)"></td><td onClick="cg(7,0)"></td><td onClick="cg(8,0)"></td><td onClick="cg(9,0)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,1)"></td><td onClick="cg(1,1)"></td><td onClick="cg(2,1)"></td><td onClick="cg(3,1)"></td><td onClick="cg(4,1)"></td><td onClick="cg(5,1)"></td><td onClick="cg(6,1)"></td><td onClick="cg(7,1)"></td><td onClick="cg(8,1)"></td><td onClick="cg(9,1)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,2)"></td><td onClick="cg(1,2)"></td><td onClick="cg(2,2)"></td><td onClick="cg(3,2)"></td><td onClick="cg(4,2)"></td><td onClick="cg(5,2)"></td><td onClick="cg(6,2)"></td><td onClick="cg(7,2)"></td><td onClick="cg(8,2)"></td><td onClick="cg(9,2)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,3)"></td><td onClick="cg(1,3)"></td><td onClick="cg(2,3)"></td><td onClick="cg(3,3)"></td><td onClick="cg(4,3)"></td><td onClick="cg(5,3)"></td><td onClick="cg(6,3)"></td><td onClick="cg(7,3)"></td><td onClick="cg(8,3)"></td><td onClick="cg(9,3)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,4)"></td><td onClick="cg(1,4)"></td><td onClick="cg(2,4)"></td><td onClick="cg(3,4)"></td><td onClick="cg(4,4)"></td><td onClick="cg(5,4)"></td><td onClick="cg(6,4)"></td><td onClick="cg(7,4)"></td><td onClick="cg(8,4)"></td><td onClick="cg(9,4)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">WC</td>
+            <td onClick="cg(0,5)"></td><td onClick="cg(1,5)"></td><td onClick="cg(2,5)"></td><td onClick="cg(3,5)"></td><td onClick="cg(4,5)"></td><td onClick="cg(5,5)"></td><td onClick="cg(6,5)"></td><td onClick="cg(7,5)"></td><td onClick="cg(8,5)"></td><td onClick="cg(9,5)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">DIV</td>
+            <td onClick="cg(0,6)"></td><td onClick="cg(1,6)"></td><td onClick="cg(2,6)"></td><td onClick="cg(3,6)"></td><td onClick="cg(4,6)"></td><td onClick="cg(5,6)"></td><td onClick="cg(6,6)"></td><td onClick="cg(7,6)"></td><td onClick="cg(8,6)"></td><td onClick="cg(9,6)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">DIV</td>
+            <td onClick="cg(0,7)"></td><td onClick="cg(1,7)"></td><td onClick="cg(2,7)"></td><td onClick="cg(3,7)"></td><td onClick="cg(4,7)"></td><td onClick="cg(5,7)"></td><td onClick="cg(6,7)"></td><td onClick="cg(7,7)"></td><td onClick="cg(8,7)"></td><td onClick="cg(9,7)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">DIV</td>
+            <td onClick="cg(0,8)"></td><td onClick="cg(1,8)"></td><td onClick="cg(2,8)"></td><td onClick="cg(3,8)"></td><td onClick="cg(4,8)"></td><td onClick="cg(5,8)"></td><td onClick="cg(6,8)"></td><td onClick="cg(7,8)"></td><td onClick="cg(8,8)"></td><td onClick="cg(9,8)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">DIV</td>
+            <td onClick="cg(0,9)"></td><td onClick="cg(1,9)"></td><td onClick="cg(2,9)"></td><td onClick="cg(3,9)"></td><td onClick="cg(4,9)"></td><td onClick="cg(5,9)"></td><td onClick="cg(6,9)"></td><td onClick="cg(7,9)"></td><td onClick="cg(8,9)"></td><td onClick="cg(9,9)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">NFC</td>
+            <td onClick="cg(0,10)"></td><td onClick="cg(1,10)"></td><td onClick="cg(2,10)"></td><td onClick="cg(3,10)"></td><td onClick="cg(4,10)"></td><td onClick="cg(5,10)"></td><td onClick="cg(6,10)"></td><td onClick="cg(7,10)"></td><td onClick="cg(8,10)"></td><td onClick="cg(9,10)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">AFC</td>
+            <td onClick="cg(0,11)"></td><td onClick="cg(1,11)"></td><td onClick="cg(2,11)"></td><td onClick="cg(3,11)"></td><td onClick="cg(4,11)"></td><td onClick="cg(5,11)"></td><td onClick="cg(6,11)"></td><td onClick="cg(7,11)"></td><td onClick="cg(8,11)"></td><td onClick="cg(9,11)"></td>
+        </tr>
+        <tr>
+            <td class="game_d">SB</td>
+            <td onClick="cg(0,12)"></td><td onClick="cg(1,12)"></td><td onClick="cg(2,12)"></td><td onClick="cg(3,12)"></td><td onClick="cg(4,12)"></td><td onClick="cg(5,12)"></td><td onClick="cg(6,12)"></td><td onClick="cg(7,12)"></td><td onClick="cg(8,12)"></td><td onClick="cg(9,12)"></td>
+        </tr>
+        <tr>
+            <td class="game_d" title="Probability of winning outright">PWIN</td>
+            <th colspan="2" class="friend_head"></th>
+            <th colspan="2" class="friend_head"></th>
+            <th colspan="2" class="friend_head"></th>
+            <th colspan="2" class="friend_head"></th>
+            <th colspan="2" class="friend_head"></th>
+        </tr>
+    </table>
+
+</body>
+
+<script>
+
+    var PD = null;
+    var BS = null;
+
+    function cg(x,y) {
+        // get the square we clicked on
+        var lik_table = document.getElementById('likely_brackets');
+        var this_cell = lik_table.children[0].children[y+1].children[x+1];
+
+        var x1 = x+1;
+        var x2 = null
+        if (x%2) { 
+            x2 = x;
+        } else {
+            x2 = x+2;
+        }
+
+        if (lik_table.children[0].children[y+1].children[x1].innerHTML == "" | lik_table.children[0].children[y+1].children[x2].innerHTML == ""){
+            return
+        }
+
+        // see if we clicked on a red square
+        if (this_cell.className == "losecss" ) {
+            // Erase the probability number at the bottom
+            lik_table.children[0].children[14].children[Math.floor(x/2)+1].innerHTML = ""
+            
+            // flip the css on this game
+            lik_table.children[0].children[y+1].children[x1].className = "wincss";
+            lik_table.children[0].children[y+1].children[x2].className = "losecss";
+
+            // find which games need to be cleared in the option
+            if (y==0 | y==3 | y==5) {
+                lik_table.children[0].children[8].children[x1].className = "unkcss";
+                lik_table.children[0].children[9].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+                lik_table.children[0].children[8].children[x2].className = "unkcss";
+                lik_table.children[0].children[9].children[x2].className = "unkcss";
+                lik_table.children[0].children[11].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+                lik_table.children[0].children[13].children[1+x-(x%2)].innerHTML = "";
+
+            } else if (y==1 | y==2 | y==4) {
+                lik_table.children[0].children[7].children[x1].className = "unkcss";
+                lik_table.children[0].children[10].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x1].innerHTML = "";
+                lik_table.children[0].children[7].children[x2].className = "unkcss";
+                lik_table.children[0].children[10].children[x2].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].innerHTML = "";
+                lik_table.children[0].children[13].children[2+x-(x%2)].innerHTML = "";
+
+            } else if (y==6 | y==9) {
+                lik_table.children[0].children[12].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[2+x-(x%2)].innerHTML = "";
+
+            } else if (y==7 | y==8) {
+                lik_table.children[0].children[11].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[1+x-(x%2)].innerHTML = "";
+
+            } else if (y==10 | y==11) {
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+            }
+
+        } else if (this_cell.className = "unkcss" ) {
+        
+            lik_table.children[0].children[y+1].children[x1].className = "wincss";
+            lik_table.children[0].children[y+1].children[x2].className = "losecss";
+
+        }
+
+        // if all games are populated, get and display a probability
+        var branch = 0
+        var games_picked = 0
+        for (i = 0; i < 13; i++) {
+            let cel = lik_table.children[0].children[13-i].children[1+x-(x%2)]
+            if (cel.className == "losecss") {
+                branch += 2**i
+                games_picked += 1
+            } else if (cel.className == "wincss") {
+                branch += 0
+                games_picked += 1
+            } else if (cel.className == "unkcss") {
+                branch += 0
+            } else {
+                return
+            }
+        }
+
+        BS[Math.floor(x/2)] = branch;
+        update_table(false, [Math.floor(x/2)]);
+
+        if (games_picked < 13) {
+            // Erase the probability number at the bottom
+            lik_table.children[0].children[14].children[Math.floor(x/2)+1].innerHTML = ""
+            
+            // flip the css on this game
+            lik_table.children[0].children[y+1].children[x1].className = "wincss";
+            lik_table.children[0].children[y+1].children[x2].className = "losecss";
+
+            // find which games need to be cleared in the option
+            if (y==0 | y==3 | y==5) {
+                lik_table.children[0].children[8].children[x1].className = "unkcss";
+                lik_table.children[0].children[9].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+                lik_table.children[0].children[8].children[x2].className = "unkcss";
+                lik_table.children[0].children[9].children[x2].className = "unkcss";
+                lik_table.children[0].children[11].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+                lik_table.children[0].children[13].children[1+x-(x%2)].innerHTML = "";
+
+            } else if (y==1 | y==2 | y==4) {
+                lik_table.children[0].children[7].children[x1].className = "unkcss";
+                lik_table.children[0].children[10].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x1].innerHTML = "";
+                lik_table.children[0].children[7].children[x2].className = "unkcss";
+                lik_table.children[0].children[10].children[x2].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].innerHTML = "";
+                lik_table.children[0].children[13].children[2+x-(x%2)].innerHTML = "";
+
+            } else if (y==6 | y==9) {
+                lik_table.children[0].children[12].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[12].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[2+x-(x%2)].innerHTML = "";
+
+            } else if (y==7 | y==8) {
+                lik_table.children[0].children[11].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[11].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+                lik_table.children[0].children[13].children[1+x-(x%2)].innerHTML = "";
+
+            } else if (y==10 | y==11) {
+                lik_table.children[0].children[13].children[x1].className = "unkcss";
+                lik_table.children[0].children[13].children[x2].className = "unkcss";
+            }
+
+
+        } else if (this_cell.className = "unkcss" ) {
+            lik_table.children[0].children[y+1].children[x1].className = "wincss";
+            lik_table.children[0].children[y+1].children[x2].className = "losecss";
+        }
+
+        // clean up without thinking about it too much
+        if (lik_table.children[0].children[7].children[x1].className == "unkcss") {
+            var iv1 = lik_table.children[0].children[7].children[x1].innerHTML;
+            var iv2 = lik_table.children[0].children[7].children[x2].innerHTML;
+
+            if (lik_table.children[0].children[12].children[x1].innerHTML == iv1 | lik_table.children[0].children[12].children[x1].innerHTML == iv2) {
+                lik_table.children[0].children[12].children[x1].innerHTML = "";
+            } 
+            if (lik_table.children[0].children[12].children[x2].innerHTML == iv1 | lik_table.children[0].children[12].children[x2].innerHTML == iv2) {
+                lik_table.children[0].children[12].children[x2].innerHTML = "";
+            }
+        }
+        if (lik_table.children[0].children[8].children[x1].className == "unkcss") {
+            var iv1 = lik_table.children[0].children[8].children[x1].innerHTML;
+            var iv2 = lik_table.children[0].children[8].children[x2].innerHTML;
+
+            if (lik_table.children[0].children[11].children[x1].innerHTML == iv1 | lik_table.children[0].children[11].children[x1].innerHTML == iv2) {
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+            } 
+            if (lik_table.children[0].children[11].children[x2].innerHTML == iv1 | lik_table.children[0].children[11].children[x2].innerHTML == iv2) {
+                lik_table.children[0].children[11].children[x2].innerHTML = "";
+            }
+        }
+        if (lik_table.children[0].children[9].children[x1].className == "unkcss") {
+            var iv1 = lik_table.children[0].children[9].children[x1].innerHTML;
+            var iv2 = lik_table.children[0].children[9].children[x2].innerHTML;
+
+            if (lik_table.children[0].children[11].children[x1].innerHTML == iv1 | lik_table.children[0].children[11].children[x1].innerHTML == iv2) {
+                lik_table.children[0].children[11].children[x1].innerHTML = "";
+            } 
+            if (lik_table.children[0].children[11].children[x2].innerHTML == iv1 | lik_table.children[0].children[11].children[x2].innerHTML == iv2) {
+                lik_table.children[0].children[11].children[x2].innerHTML = "";
+            }
+        }
+        if (lik_table.children[0].children[10].children[x1].className == "unkcss") {
+            var iv1 = lik_table.children[0].children[10].children[x1].innerHTML;
+            var iv2 = lik_table.children[0].children[10].children[x2].innerHTML;
+
+            if (lik_table.children[0].children[12].children[x1].innerHTML == iv1 | lik_table.children[0].children[12].children[x1].innerHTML == iv2) {
+                lik_table.children[0].children[12].children[x1].innerHTML = "";
+            } 
+            if (lik_table.children[0].children[12].children[x2].innerHTML == iv1 | lik_table.children[0].children[12].children[x2].innerHTML == iv2) {
+                lik_table.children[0].children[12].children[x2].innerHTML = "";
+            }
+        }
+
+        if (lik_table.children[0].children[11].children[x1].className == "unkcss") {
+            lik_table.children[0].children[13].children[1+x-(x%2)].innerHTML = "";
+        }
+
+        if (lik_table.children[0].children[12].children[x1].className == "unkcss") {
+            lik_table.children[0].children[13].children[2+x-(x%2)].innerHTML = "";
+        }
+
+
+        
+
+        console.log(branch)
+    }
+
+    function addFriend(elem) {
+        let newRow = "<tr><td><input value = 'Friend'></td><td><table class='strattable'><tr><th title='Choose from a menu of strategies'>Type</th><th title='How much weight to give this strategy compared to the others'>Weight</th><th title='Input the parameters needed for this particular strategy'>Parameters</th></tr><tr><td><select onchange='setParams(this.parentElement.parentElement, this.value);'><option value='random' title='Each game is a 50-50'>Random</option><option value='chalk' title='Picks the favorite in every game'>Chalk</option><option value='pick_against' title='Picks the underdog a certain number of times'>Pick Underdog</option><option value='favorite_team' title='Picks a favorite team to win it all'>Favorite Team</option><option value='tossup' title='Every close game is modeled as a 50-50'>Tossup</option><option value='extremify' title='Probability of picking a team to win is related to their probability of winning'>Extremify</option></select></td><td><input type='number' value = '1.0' step='0.1' id='number'></td><td></td></tr><tr><td id='newstrat' colspan='3' onClick='addStrat(this)'>Add Strat</td></tr></table></td></tr>";
+        document.getElementById('newfriend').parentElement.insertAdjacentHTML('beforebegin', newRow)
+    }
+
+    function addStrat(elem) {
+        let newRow = "<tr><td><select onchange='setParams(this.parentElement.parentElement, this.value);'><option value='random'>Random</option><option value='chalk'>Chalk</option><option value='pick_against'>Pick Underdog</option><option value='favorite_team'>Favorite Team</option><option value='tossup'>Tossup</option><option value='extremify'>Extremify</option></select></td><td><input type='number' value = '1.0' step='0.1' id='number'></td><td></td></tr>";
+        elem.parentElement.insertAdjacentHTML('beforebegin', newRow)
+    }
+
+    function setParams(tr_elem, type) {
+        let param = tr_elem.children[2];
+        if (type == "random") {
+            param.innerHTML = "";
+        } else if (type == "chalk") {
+            param.innerHTML = "";
+        } else if (type == "pick_against") {
+            param.innerHTML = "<input type='number' value = '1' step='1' id='number' title='Expected number of games to pick the upset (out of 13)'>";
+        } else if (type == "favorite_team") {
+            param.innerHTML = "<select title='Favorite team'><option value='1'>KC</option><option value='2'>BUF</option><option value='3'>CIN</option><option value='4'>JAX</option><option value='5'>LAC</option><option value='6'>BAL</option><option value='7'>MIA</option><option value='11'>PHI</option><option value='12'>SF</option><option value='13'>MIN</option><option value='14'>TB</option><option value='15'>DAL</option><option value='16'>NYG</option><option value='17'>SEA</option></select> <input type='number' value = '1.0' step='0.1' id='number' title='\"Extremify\" parameter for games that do not involve favorite team'>";
+        } else if (type == "tossup") {
+            param.innerHTML = "<input type='number' value = '0.05' step='0.01' id='number' title='Threshold for considering a game a tossup. For example, a value of 0.07 would consider games with win probabilities between 0.43 and 0.57 a tossup.'>";
+        } else if (type == "extremify") {
+            param.innerHTML = "<input type='number' value = '1.0' step='0.1' id='number' title='Probability of picking a team is related to the probability of team winning through the equation  P_pick = (P_win^x) / (P_win^x + (1 - P_win)^x). Values greater than 1 mean more likely to pick the favorite, values less than 1 mean less likely to pick the favorite.'>";
+        }
+    }
+
+    function get_table_data() {
+        var table = document.getElementById('stratTable');
+        var rows = table.children[0].children;
+        var data = [];
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var name = cells[0].children[0].value
+
+            var strats = []
+            var strat_rows = cells[1].children[0].children[0].children
+            for (var j = 1; j < strat_rows.length - 1; j++) {
+                var tcells = strat_rows[j].getElementsByTagName('td');
+                var type = tcells[0].children[0].value
+                var weight = parseFloat(tcells[1].children[0].value)
+                var params = []
+                if (type == "pick_against") {
+                    params = [parseFloat(tcells[2].children[0].value)];
+                } else if (type == "favorite_team") {
+                    params = [parseInt(tcells[2].children[0].value), parseFloat(tcells[2].children[1].value)];
+                } else if (type == "p_shift") {
+                    params = [parseFloat(tcells[2].children[0].value)];
+                } else if (type == "extremify") {
+                    params = [parseFloat(tcells[2].children[0].value)];
+                }
+
+                var strat = { type: type, weight: weight, params: params }
+                strats.push(strat)
+            }
+
+            tdata = { name: name, strats: strats }
+            data.push(tdata)
+        }
+        return data;
+    }
+
+    function round(value, precision) {
+        var multiplier = Math.pow(10, precision || 0);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
+    function get_games_on_branch(branch) {
+        var games = [];
+        var wins = []
+        var game = 8191 + branch;
+        while (game > 0) {
+            if (game % 2 == 0) {
+                wins.unshift(1);
+            } else {
+                wins.unshift(0);
+            }
+
+            game = Math.floor((game - 1) / 2);
+            games.unshift(game_probs.dat[game]);
+
+        }
+        return [games, wins];
+    }
+
+    function update_table(css_flag, I) {
+
+        var teams = {
+            1: "KC", 2: "BUF", 3: "CIN", 4: "JAC", 5: "LAC", 6: "BAL", 7: "MIA",
+            11: "PHI", 12: "SF", 13: "MIN", 14: "TB", 15: "DAL", 16: "NYG", 17: "SEA"
+        }
+        var lik_table = document.getElementById('likely_brackets');
+
+        var sort_order = Array.from(Array(PD.length).keys()).sort((a, b) => PD[a] > PD[b] ? -1 : (PD[b] > PD[a]) | 0)
+
+        var prob_row = lik_table.children[0].children[14];
+
+        for (ii = 0; ii < I.length; ii++) {
+
+            i = I[ii];
+
+            prob_row.children[i + 1].innerHTML = round(PD[BS[i]] * 100, 1) + "%";
+
+            var [g1, w1] = get_games_on_branch(BS[i]);
+
+            for (var j = 0; j < 13; j++) {
+
+
+                lik_table.children[0].children[j + 1].children[2 * i + 1].innerHTML = teams[g1[j][0]];
+                lik_table.children[0].children[j + 1].children[2 * i + 2].innerHTML = teams[g1[j][1]];
+                if (w1[j] == 0 & css_flag) {
+                    lik_table.children[0].children[j + 1].children[2 * i + 1].className = "wincss";
+                    lik_table.children[0].children[j + 1].children[2 * i + 2].className = "losecss";
+                } else if (css_flag){
+                    lik_table.children[0].children[j + 1].children[2 * i + 1].className = "losecss";
+                    lik_table.children[0].children[j + 1].children[2 * i + 2].className = "wincss";
+                }
+            }
+        }
+
+    }
+
+    var game_probs = null;
+    fetch('./game_probs.json')
+        .then(response => response.json())
+        .then(data => game_probs = data)
+        .catch(error => console.log(error));
+
+    var webWorker = new Worker("dowork.js");
+    // var responses = [];
+
+    webWorker.onmessage = function (response){
+        if (response.data.flag == 1) {
+            // console.log(response.data.count, response.data.branch, response.data.result)
+            // responses.push(response.data)
+            // update_table(responses)
+            document.getElementById('calcButton').innerHTML = "Assessing branch " +response.data.count+ "/8192...";
+        } else if (response.data.flag == 0) {
+            document.getElementById('calcButton').innerHTML = "Predicting friend " +response.data.friend+ "/" +response.data.friends+ "...";
+        } else if (response.data.flag == 2){
+            // console.log(response.data.result)
+            document.getElementById('calcButton').innerHTML = "Calculate Best Options";
+            PD = response.data.result;
+            var sort_order = Array.from(Array(PD.length).keys()).sort((a, b) => PD[a] > PD[b] ? -1 : (PD[b] > PD[a]) | 0)
+            BS = sort_order.slice(0,5)
+            update_table(true, [0,1,2,3,4]);
+        }
+    }
+
+    function dowork() {
+        document.getElementById('calcButton').innerHTML = "Loading...";
+        responses = [];
+        dat = get_table_data()
+        webWorker.postMessage(dat);
+    }
+
+    const modal = document.querySelector(".modal");
+    const trigger = document.querySelector(".trigger");
+    const closeButton = document.querySelector(".close-button");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+
+
+</script>
+
+<!-- <script src="test.js"></script> -->

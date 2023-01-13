@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+
+<body onload="document.getElementById('newfriend').click()">
+    <table id="stratTable">
+        <tr>
+          <th>Friend</th>
+          <th>Selection Strategy</th>
+        </tr>
+        <tr>
+          <td id="newfriend" colspan="2" onClick="addFriend(this)">Add Friend</td>
+        </tr>
+      </table>
+
+      <br/>
+      <button onclick="calculate()">Calculate</button>
+      
+      <br/><br/>
+
+      <table id="likely_brackets">
+        <tr>
+            <th></th>
+            <th colspan="2" class="friend_head">NameA</th>
+        </tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">WC</td><td></td><td></td></tr>
+        <tr><td class="game_d">DIV</td><td></td><td></td></tr>
+        <tr><td class="game_d">DIV</td><td></td><td></td></tr>
+        <tr><td class="game_d">DIV</td><td></td><td></td></tr>
+        <tr><td class="game_d">DIV</td><td></td><td></td></tr>
+        <tr><td class="game_d">NFC</td><td></td><td></td></tr>
+        <tr><td class="game_d">AFC</td><td></td><td></td></tr>
+        <tr><td class="game_d">SB</td><td></td><td></td></tr>
+      </table>
+</body>
+
+<script>
+    
+    function addFriend(elem) {
+        let newRow = "<tr><td><input value = 'Friend 1'></td><td><table><tr><th>Type</th><th>Weight</th><th>Parameters</th></tr><tr><td><select onchange='setParams(this.parentElement.parentElement, this.value);'><option value='random'>Random</option><option value='pick_against'>Pick Against</option><option value='favorite_team'>Favorite Team</option><option value='tossup'>Tossup</option><option value='extremify'>Extremify</option></select></td><td><input type='number' value = '1.0' step='0.1' id='number'></td><td></td></tr><tr><td id='newstrat' colspan='3' onClick='addStrat(this)'>Add Strat</td></tr></table></td></tr>";
+        document.getElementById('newfriend').parentElement.insertAdjacentHTML('beforebegin', newRow)
+    }
+
+    function addStrat(elem) {
+        let newRow = "<tr><td><select onchange='setParams(this.parentElement.parentElement, this.value);'><option value='random'>Random</option><option value='pick_against'>Pick Against</option><option value='favorite_team'>Favorite Team</option><option value='tossup'>Tossup</option><option value='extremify'>Extremify</option></select></td><td><input type='number' value = '1.0' step='0.1' id='number'></td><td></td></tr>";
+        elem.parentElement.insertAdjacentHTML('beforebegin', newRow)
+    }
+
+    function setParams(tr_elem, type) {
+        let param = tr_elem.children[2];
+        if (type == "random") {
+            param.innerHTML = "";
+        } else if (type == "pick_against") {
+            param.innerHTML = "<input type='number' value = '0' step='1' id='number'>";
+        } else if (type == "favorite_team") {
+            param.innerHTML = "<select><option value='1'>KC</option><option value='2'>BUF</option><option value='3'>CIN</option><option value='4'>JAX</option><option value='5'>LAC</option><option value='6'>BAL</option><option value='7'>MIA</option><option value='11'>PHI</option><option value='12'>SF</option><option value='13'>MIN</option><option value='14'>TB</option><option value='15'>DAL</option><option value='16'>NYG</option><option value='17'>SEA</option></select> <input type='number' value = '0.0' step='0.1' id='number'>";
+        } else if (type == "tossup") {
+            param.innerHTML = "<input type='number' value = '0.0' step='0.01' id='number'>";
+        } else if (type == "extremify") {
+            param.innerHTML = "<input type='number' value = '1.0' step='0.1' id='number'>";
+        }
+    }
+
+    var game_probs = null;
+    var score_matrix = null;
+
+    fetch('./game_probs.json')
+        .then(response => response.json())
+        .then(data => game_probs = data)
+        .catch(error => console.log(error));
+
+    fetch('./score_matrix.json')
+        .then(response => response.json())
+        .then(data => score_matrix = data.dat)
+        .catch(error => console.log(error));
+
+
+    var webWorker = new Worker("calculate.js");
+    var data_in = {
+        score_matrix: score_matrix,
+        n_friends: n_friends,
+        PS: PS,
+        outcomePs: outcomePs
+    }
+    webWorker.postMessage(data_in, [data_in.score_matrix.buffer, data_in.PS.buffer, data_in.outcomePs.buffer]);
+    webWorker.onmessage = function (response){
+        console.log("worker response:")
+        console.log(response.data.result)
+    }
+
+
+</script>
+
+<script src="test.js"></script>
