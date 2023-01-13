@@ -6,7 +6,8 @@ fetch('./game_probs.json')
     .then(data => game_probs = data)
     .catch(error => console.log(error));
 
-fetch('https://github.com/jacobwood27/052_bracketsim2/raw/main/score_matrix.json.gz')
+    
+fetch('https://raw.githubusercontent.com/jacobwood27/052_bracketsim2/main/score_matrix.json.gz')
     .then(response => response.json())
     .then(data => score_matrix = data.dat)
     .catch(error => console.log(error));
@@ -147,6 +148,8 @@ function get_strat_av_P(datrow) {
 }
 
 this.onmessage=function(response){
+    console.log(game_probs)
+    
     var dat = response.data;
     var outcomePs = outcome_probs();
 
