@@ -1,5 +1,5 @@
-body {padding: 50px; font-family: sans-serif;}
-table, th, td {border: 1px solid #000; border-collapse: collapse;}
+body {padding: 20px; font-family: sans-serif;}
+table, th, td {border: 1px solid #000; border-collapse: collapse; width:100%; max-width: 480px;}
 th, td {padding: 8px;}
 th {text-transform: capitalize;}
 button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: bold; text-transform: capitalize;font-size: 18px;}
@@ -8,13 +8,23 @@ button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: b
 #newstrat {text-align: center; font-weight: bold; background-color: rgb(215, 252, 220);}
 #newstrat:hover {cursor: pointer; background-color: grey; color: #fff;}
 #number {width: 3em;}
-.strattable td{padding: 4px; font-size: 12px;}
-.strattable th{padding: 4px; font-size: 12px;}
+.strattable td{padding: 4px; font-size: smaller;}
+.strattable th{padding: 4px; font-size: smaller;}
 .wincss {background-color: rgb(150, 214, 150); text-align: center; font-weight: bold; cursor: pointer;}
 .losecss {background-color: rgb(233, 156, 156); text-align: center; cursor: pointer;}
 .unkcss {background-color: rgb(230, 230, 230); text-align: center; cursor: pointer;}
 .friend_head {text-align: center; font-weight: bold;}
-.game_d {text-align: center; font-weight: bold;}
+.game_d {text-align: center; font-weight: bold; max-width: 4rem}
+
+@media only screen and (max-width: 640px) {
+    body {padding: 0px; font-family: sans-serif;}
+    th, td {padding: 4px;}
+    #selbar {width: 80px;}
+    .strattable td{padding: 2px; font-size: x-small;}
+    .strattable th{padding: 2px; font-size: x-small;}
+    #likely_brackets td{padding: 2px; font-size: x-small;}
+    #likely_brackets th{padding: 2px; font-size: small;}
+  }
 
 .border-less {
     border-top: 1px solid #FFFFFF;
@@ -41,7 +51,10 @@ button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: b
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 1rem 1.5rem;
-    width: 36rem;
+    width: 80%;
+    max-width: 640px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
     border-radius: 0.5rem;
 }
 
