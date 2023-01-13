@@ -6,7 +6,7 @@ fetch('./game_probs.json')
     .then(data => game_probs = data)
     .catch(error => console.log(error));
 
-fetch('./score_matrix.json')
+fetch('https://github.com/jacobwood27/052_bracketsim2/raw/main/score_matrix.json.gz')
     .then(response => response.json())
     .then(data => score_matrix = data.dat)
     .catch(error => console.log(error));
