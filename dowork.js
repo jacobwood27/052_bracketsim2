@@ -7,7 +7,7 @@ fetch('./game_probs.json')
     .catch(error => console.log(error));
 
     
-fetch('https://raw.githubusercontent.com/jacobwood27/052_bracketsim2/main/score_matrix.json.gz')
+fetch('./score_matrix.json')
     .then(response => response.json())
     .then(data => score_matrix = data.dat)
     .catch(error => console.log(error));
@@ -149,7 +149,7 @@ function get_strat_av_P(datrow) {
 
 this.onmessage=function(response){
     console.log(game_probs)
-    
+
     var dat = response.data;
     var outcomePs = outcome_probs();
 
@@ -191,7 +191,7 @@ this.onmessage=function(response){
         // cycle through all the outcomes
         var chance_win = 0.0;
         for (var i = 0; i < 8192; i++) {
-            var my_score = score_matrix[i][mp];
+            var my_score = score_matrix[mp][i];
 
             // find chance I beat each friend with this pick and this outcome
             var friend_p_beats = []
