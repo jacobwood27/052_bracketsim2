@@ -389,6 +389,14 @@ end
 OUTCOME_PROBS = get_outcome_prob.(1:8192)
 #sum(OUTCOME_PROBS)
 
+# using Plots
+# histogram(log10.(OUTCOME_PROBS), 
+#     legend=false,
+#     xlabel="log(outcome probability)",
+#     ylabel="counts", xticks=-10:1:0)
+# savefig("outcome_probs.svg")
+
+
 function get_winners(i)
     lr_index = get_lr(i)
     branch = get_branch(lr_index)
