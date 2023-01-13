@@ -1,5 +1,5 @@
 body {padding: 20px; font-family: sans-serif;}
-table, th, td {border: 1px solid #000; border-collapse: collapse; width:100%; max-width: 480px;}
+table, th, td {border: 1px solid #000; border-collapse: collapse; }
 th, td {padding: 8px;}
 th {text-transform: capitalize;}
 button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: bold; text-transform: capitalize;font-size: 18px;}
@@ -15,6 +15,7 @@ button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: b
 .unkcss {background-color: rgb(230, 230, 230); text-align: center; cursor: pointer;}
 .friend_head {text-align: center; font-weight: bold;}
 .game_d {text-align: center; font-weight: bold; max-width: 4rem}
+#likely_brackets td{width:2em;}
 
 @media only screen and (max-width: 640px) {
     body {padding: 0px; font-family: sans-serif;}
@@ -22,6 +23,7 @@ button {padding: 8px; font-family: sans-serif;text-align: center; font-weight: b
     #selbar {width: 80px;}
     .strattable td{padding: 2px; font-size: x-small;}
     .strattable th{padding: 2px; font-size: x-small;}
+    #likely_brackets {table-layout: fixed}
     #likely_brackets td{padding: 2px; font-size: x-small;}
     #likely_brackets th{padding: 2px; font-size: small;}
   }
