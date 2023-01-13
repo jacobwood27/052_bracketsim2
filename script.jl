@@ -472,9 +472,14 @@ end
 SCORE_MAT = get_score_mat()
 #writedlm( "score_matrix.csv",  SCORE_MAT, ',')
 dat = Dict()
-dat["dat"] = [i for i in eachrow(SCORE_MAT)]
+V = []
+for i in 1:8192
+    push!(V, SCORE_MAT[i, i:8192])
+end
+dat["dat"] = V
+# dat["dat"] = [i for i in eachrow(SCORE_MAT)]
 # write dat to file
-open("score_matrix.json", "w") do io
+open("score_matrix_tri.json", "w") do io
     JSON.print(io, dat)
 end
 
