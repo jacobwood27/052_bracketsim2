@@ -420,7 +420,7 @@
         } else if (type == "pick_against") {
             param.innerHTML = "<input type='number' value = '1' step='1' id='number' title='Expected number of games to pick the upset (out of 13)'>";
         } else if (type == "favorite_team") {
-            param.innerHTML = "<select title='Favorite team'><option value='1'>KC</option><option value='2'>BUF</option><option value='3'>CIN</option><option value='4'>JAX</option><option value='5'>LAC</option><option value='6'>BAL</option><option value='7'>MIA</option><option value='11'>PHI</option><option value='12'>SF</option><option value='13'>MIN</option><option value='14'>TB</option><option value='15'>DAL</option><option value='16'>NYG</option><option value='17'>SEA</option></select> <input type='number' value = '1.0' step='0.1' id='number' title='\"Extremify\" parameter for games that do not involve favorite team'>";
+            param.innerHTML = "<select title='Favorite team'><option value='1'>BAL</option><option value='2'>BUF</option><option value='3'>KC</option><option value='4'>HOU</option><option value='5'>CLE</option><option value='6'>MIA</option><option value='7'>PIT</option><option value='11'>SF</option><option value='12'>DAL</option><option value='13'>DET</option><option value='14'>TB</option><option value='15'>PHI</option><option value='16'>LAR</option><option value='17'>GB</option></select> <input type='number' value = '1.0' step='0.1' id='number' title='\"Extremify\" parameter for games that do not involve favorite team'>";
         } else if (type == "tossup") {
             param.innerHTML = "<input type='number' value = '0.05' step='0.01' id='number' title='Threshold for considering a game a tossup. For example, a value of 0.07 would consider games with win probabilities between 0.43 and 0.57 a tossup.'>";
         } else if (type == "extremify") {
@@ -489,8 +489,8 @@
     function update_table(css_flag, I) {
 
         var teams = {
-            1: "KC", 2: "BUF", 3: "CIN", 4: "JAC", 5: "LAC", 6: "BAL", 7: "MIA",
-            11: "PHI", 12: "SF", 13: "MIN", 14: "TB", 15: "DAL", 16: "NYG", 17: "SEA"
+            1: "BAL", 2: "BUF", 3: "KC", 4: "HOU", 5: "CLE", 6: "MIA", 7: "PIT",
+            11: "SF", 12: "DAL", 13: "DET", 14: "TB", 15: "PHI", 16: "LAR", 17: "GB"
         }
         var lik_table = document.getElementById('likely_brackets');
 

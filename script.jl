@@ -83,33 +83,77 @@
 # WINS = []
 
 
-#2023
+# #2023
+# # Who made it to playoffs, and how good are they?
+# TEAMS = Dict(
+#     1  => ( "KC", 1702,    (39.048914, -94.484039)),
+#     2  => ("BUF", 1708,    (42.773739, -78.786978)),
+#     3  => ("CIN", 1666,    (39.095442, -84.516039)),
+#     4  => ("JAX", 1540,    (30.323674, -81.637328)),
+#     5  => ("LAC", 1543,    (33.952815, -118.340306)),
+#     6  => ("BAL", 1608-92, (39.277969, -76.622767)),
+#     7  => ("MIA", 1509-160, (25.956799, -80.240191)),
+
+#     11 => ("PHI", 1650,    (39.900775, -75.167453)),
+#     12 => ( "SF", 1700-80, (37.713486,-122.386256)),
+#     13 => ("MIN", 1553,    (44.973805, -93.259297)),
+#     14 => ( "TB", 1504,    (27.975967, -82.503350)),
+#     15 => ("DAL", 1616,    (32.747778, -97.092778)),
+#     16 => ("NYG", 1503,    (40.813303, -74.074500)),
+#     17 => ("SEA", 1463,    (47.595153, -122.33162)),
+# )
+
+# # Where is superbowl played?
+# SUPERBOWL_LOC = (33.525890, -112.261958)
+
+# # What were the picks people made?
+# PICKS = [
+#     # ("Akhil" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "TEN",  "KC", "GB", "TEN", "TEN"]),
+#     # ("Steve" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "CIN", "BUF", "GB", "BUF",  "GB"]),
+#     # ("Dustin", [ "TB", "SF", "ARI", "KC", "BUF", "CIN",  "GB", "ARI", "TEN",  "KC", "GB",  "KC",  "GB"]),
+#     # ("Jacob" , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "TEN",  "KC", "GB", "TEN",  "GB"]),
+#     # ("Ben"   , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB", "DAL", "TEN", "BUF", "GB", "TEN",  "GB"]),
+#     # ("Eric"  , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB", "DAL", "CIN", "BUF", "GB", "BUF", "BUF"]),
+#     # ("Mo"    , [ "TB","DAL", "LAR", "KC",  "NE", "CIN",  "GB",  "TB", "TEN",  "KC", "GB",  "KC",  "KC"]),
+#     # ("Drew"  , [ "TB","DAL", "ARI", "KC",  "NE",  "LV",  "GB",  "TB",  "NE",  "KC", "TB",  "KC",  "KC"]),
+#     # ("David" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB", "LAR", "TEN", "BUF","LAR", "BUF", "BUF"]),
+#     # ("Sean"  , [ "TB","DAL", "LAR", "KC", "BUF",  "LV",  "GB",  "TB", "TEN", "BUF", "GB", "TEN",  "GB"]),
+#     # ("Guim"  , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB", "LAR", "TEN", "BUF", "GB", "BUF",  "GB"]),
+# ]
+
+# # Who has played and won their games already?
+# WINS = []
+
+
+
+#2024
 # Who made it to playoffs, and how good are they?
 TEAMS = Dict(
-    1  => ( "KC", 1702,    (39.048914, -94.484039)),
-    2  => ("BUF", 1708,    (42.773739, -78.786978)),
-    3  => ("CIN", 1666,    (39.095442, -84.516039)),
-    4  => ("JAX", 1540,    (30.323674, -81.637328)),
-    5  => ("LAC", 1543,    (33.952815, -118.340306)),
-    6  => ("BAL", 1608-92, (39.277969, -76.622767)),
-    7  => ("MIA", 1509-160, (25.956799, -80.240191)),
-
-    11 => ("PHI", 1650,    (39.900775, -75.167453)),
-    12 => ( "SF", 1700-80, (37.713486,-122.386256)),
-    13 => ("MIN", 1553,    (44.973805, -93.259297)),
-    14 => ( "TB", 1504,    (27.975967, -82.503350)),
-    15 => ("DAL", 1616,    (32.747778, -97.092778)),
-    16 => ("NYG", 1503,    (40.813303, -74.074500)),
-    17 => ("SEA", 1463,    (47.595153, -122.33162)),
+    1  => ("BAL", 1610,    (39.277969, -76.622767)),#1704 1529
+    2  => ("BUF", 1697,    (42.773739, -78.786978)),#1679 1697
+    3  => ( "KC", 1615,    (39.048914, -94.484039)),#1621 1615
+    4  => ("HOU", 1492,    (29.684456, -95.410729)),#1479 1492
+    5  => ("CLE", 1512,    (41.505885, -81.699773)),#1537 1512
+    6  => ("MIA", 1611,    (25.956799, -80.240191)),#1574 1611
+    7  => ("PIT", 1552,    (40.444805, -80.016026)),#1563 1552
+ 
+    11 => ( "SF", 1631,    (37.713486,-122.386256)),#1704 1631
+    12 => ("DAL", 1691,    (32.747778, -97.092778)),#1650 1691
+    13 => ("DET", 1607,    (42.338809, -83.044423)),#1594 1607
+    14 => ( "TB", 1436,    (27.975967, -82.503350)),#1519 1436
+    15 => ("PHI", 1546,    (39.900775, -75.167453)),#1554 1546
+    16 => ("LAR", 1571,    (38.632975, -90.188547)),#1536 1571
+    17 => ( "GB", 1519,    (44.501306, -88.062167)),#1554 1519
 )
 
 # Where is superbowl played?
-SUPERBOWL_LOC = (33.525890, -112.261958)
+SUPERBOWL_LOC = (36.089271, -115.182872)
+
 
 # What were the picks people made?
 PICKS = [
-    # ("Akhil" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "TEN",  "KC", "GB", "TEN", "TEN"]),
-    # ("Steve" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "CIN", "BUF", "GB", "BUF",  "GB"]),
+    ("Akhil" , [ "HOU", "KC", "BUF", "DAL", "DET", "PHI",  "BAL",  "SF", "DAL",  "BUF", "SF", "BAL", "BAL"]),
+    ("Steve" , [ "HOU", "KC", "BUF", "DAL", "DET", "PHI",  "BAL",  "SF", "DAL",  "BUF", "SF", "BAL", "SF"]),
     # ("Dustin", [ "TB", "SF", "ARI", "KC", "BUF", "CIN",  "GB", "ARI", "TEN",  "KC", "GB",  "KC",  "GB"]),
     # ("Jacob" , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "TEN",  "KC", "GB", "TEN",  "GB"]),
     # ("Ben"   , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB", "DAL", "TEN", "BUF", "GB", "TEN",  "GB"]),
@@ -123,7 +167,6 @@ PICKS = [
 
 # Who has played and won their games already?
 WINS = []
-
 
 #### END INPUT ####
 using StatsBase
@@ -148,13 +191,13 @@ end
 function get_teams(game_i, T)
     if     game_i < 2^1
         # return (2,7)
-        # return (4,5)
-        return (12,17)
+        return (4,5)
+        # return (12,17)
 
     elseif game_i < 2^2
         # return (13,16)
-        # return (3,6)
-        return (4,5)
+        return (3,6)
+        # return (4,5)
 
     elseif game_i < 2^3
         # return (14,15)
@@ -164,12 +207,13 @@ function get_teams(game_i, T)
     elseif game_i < 2^4
         # return (4,5)
         # return (13,16)
-        return (13,16)
+        # return (13,16)
+        return (12,17)
 
     elseif game_i < 2^5
         # return (12,17)
         # return (2,7)
-        return (3,6)
+        return (13,16)
 
     elseif game_i < 2^6
         # return (3,6)
@@ -181,7 +225,7 @@ function get_teams(game_i, T)
         # return (11,opp)
         # opp = maximum([winner(game_i,rnd,T) for rnd in [1,2,5]])
         # return (1,opp)
-        opp = maximum([winner(game_i,rnd,T) for rnd in [2,3,5]])
+        opp = maximum([winner(game_i,rnd,T) for rnd in [1,2,3]])
         return (1,opp)
         
     elseif game_i < 2^8
@@ -189,7 +233,7 @@ function get_teams(game_i, T)
         # return (tms[1],tms[2])
         # opp = maximum([winner(game_i,rnd,T) for rnd in [3,4,6]])
         # return (11,opp)
-        opp = maximum([winner(game_i,rnd,T) for rnd in [1,4,6]])
+        opp = maximum([winner(game_i,rnd,T) for rnd in [4,5,6]])
         return (11,opp)
 
     elseif game_i < 2^9
@@ -197,7 +241,7 @@ function get_teams(game_i, T)
         # return (1,opp)
         # tms = sort([winner(game_i,rnd,T) for rnd in [3,4,6]])
         # return (tms[1],tms[2])
-        tms = sort([winner(game_i,rnd,T) for rnd in [1,4,6]])
+        tms = sort([winner(game_i,rnd,T) for rnd in [4,5,6]])
         return (tms[1],tms[2])
     
     elseif game_i < 2^10
@@ -205,7 +249,7 @@ function get_teams(game_i, T)
         # return (tms[1],tms[2])
         # tms = sort([winner(game_i,rnd,T) for rnd in [1,2,5]])
         # return (tms[1],tms[2])
-        tms = sort([winner(game_i,rnd,T) for rnd in [2,3,5]])
+        tms = sort([winner(game_i,rnd,T) for rnd in [1,2,3]])
         return (tms[1],tms[2])
 
     elseif game_i < 2^11
@@ -387,7 +431,7 @@ function get_outcome_prob(i)
 end
 
 OUTCOME_PROBS = get_outcome_prob.(1:8192)
-#sum(OUTCOME_PROBS)
+sum(OUTCOME_PROBS)
 
 # using Plots
 # histogram(log10.(OUTCOME_PROBS), 
@@ -492,327 +536,6 @@ open("score_matrix_tri.json", "w") do io
 end
 
 
-## Selection models to get SELECTION_PROBS
-
-# Against the favorite for x[1]:x[2] games
-function pick_against(x)
-    num_rand = rand(x[1]:x[2])
-    game_i = sort(sample(1:13, num_rand, replace = false))
-    picks = trues(13)
-    g = 1
-    n = 1
-    for i in 1:13
-        pw_t1 = GAME_PROBS[g]
-
-        if n>num_rand || i == game_i[n] #this is a flip pick
-            if pw_t1 > 0.5 
-                pick = false
-            else
-                pick = true
-            end
-            n += 1
-        else
-            if pw_t1 > 0.5 
-                pick = true
-            else
-                pick = false
-            end
-        end
-
-        if pick
-            picks[i] = true
-            g = g*2
-        else
-            picks[i] = false
-            g = g*2 + 1
-        end
-    end
-    picks
-end
-# N = 100000
-# picks = [get_branch_num(pick_against(3)) for _ in 1:N]
-# pick_freq = [count(picks.==i)/N for i in 1:2^13]
-# histogram(picks)
-
-function p_shift(x)
-    picks = trues(13)
-    g = 1
-    for i in 1:13
-        pw_t1 = GAME_PROBS[g] + x * randn() #shift the probability by randn * stdev
-
-        if pw_t1 > 0.5 
-            picks[i] = true
-            g = g*2
-        else
-            picks[i] = false
-            g = g*2 + 1
-        end
-
-    end
-    picks
-end
-
-function extremeP(p,a)
-    p^a / (p^a + (1-p)^a)
-end
-
-function favorite_team(x)
-    t_win = x[1]
-    a = x[2]
-    
-    picks = trues(13)
-    g = 1
-    for i in 1:13
-        
-        teams = PLAYOFFS[g]
-
-        if teams[1] == t_win
-            pick = true
-        elseif teams[2] == t_win
-            pick = false
-        else #then extremify the odds and pick
-            pw_t1 = GAME_PROBS[g]
-            p = extremeP(pw_t1, a)
-            if p > rand()
-                pick = true
-            else
-                pick = false
-            end
-        end
-       
-        if pick
-            picks[i] = true
-            g = g*2
-        else
-            picks[i] = false
-            g = g*2 + 1
-        end
-    end
-    picks
-end
-
-function extremify(a)
-    picks = trues(13)
-    g = 1
-    for i in 1:13
-        pw_t1 = GAME_PROBS[g]
-        p = extremeP(pw_t1, a)
-        if p > rand()
-            picks[i] = true
-            g = g*2
-        else
-            picks[i] = false
-            g = g*2 + 1
-        end
-    end
-    picks
-end
-
-
-# MODELS = [
-#     ("Mo",     :pick_against,  (1,3)),
-#     ("Dustin", :pick_against,  (0,1)),
-#     ("Akhil",  :p_shift,       0.2),
-#     ("David",  :favorite_team, (2,3.0)),
-#     ("Ben",    :pick_against,  (1,3)),
-#     ("Eric",   :extremify,     2.0),
-#     ("Steve",  :pick_against,  (1,2)),
-#     ("Erik",   :extremify,     1.0),
-#     ("Sean",   :extremify,     0.5),
-# ]
-MODELS = [
-    ("Mo",     :pick_against,  (0,0)),
-]
-
-
-
-PICK_PROBS = []
-for model in MODELS
-    name = model[1]
-    mode = model[2]
-    parm = model[3]
-
-    N = 100000
-
-    f_dispatch = Dict(
-        :pick_against  => pick_against,
-        :p_shift       => p_shift,
-        :favorite_team => favorite_team,
-        :extremify     => extremify
-    )
-
-    f = f_dispatch[mode]
-    picks = [get_branch_num(f(parm)) for _ in 1:N]
-    pick_prob = [count(picks.==i)/N for i in 1:2^13]
-
-    push!(PICK_PROBS, pick_prob)
-end
-
-PP_TOT = [sum([pp[i] for pp in PICK_PROBS]) for i=1:8192]
-
-# function mc_run()
-
-#     #get everyone elses picks
-#     picks = [sample(1:2^13, Weights(pp)) for pp in PICK_PROBS]
-
-#     #now how would all the picks have stacked up against these?
-#     pos = zeros(Float64, 2^13)
-#     for p in 1:2^13 #Possible picks
-#         println(p)
-#         for o in 1:2^13
-#             my_score = SCORE_MAT[p,o]
-#             tied = 1
-#             win = true
-#             for pick in picks
-#                 other_score = SCORE_MAT[pick, o]
-#                 if other_score > my_score #then I don't win with this outcome
-#                     win = false
-#                     break
-#                 elseif other_score == my_score
-#                     tied += 1
-#                 end
-#             end
-#             if win
-#                 pos[p] += OUTCOME_PROBS[p] / tied
-#             end
-#         end
-#     end
-
-#     pos
-# end
-
-# pos = mc_run()
-
-
-PICKN_PROB = zeros(Float64, 2^13, length(MODELS)+1)
-for i = 1:2^13
-    println(i)
-    pi = [pp[i] for pp in PICK_PROBS]
-    pb = PoissonBinomial(pi)
-    for j = 0:length(MODELS)
-        PICKN_PROB[i,j+1] = pdf(pb, j)
-    end
-end
-
-#Now what is expected value for each pick I can make?
-ev = zeros(Float64, 2^13)
-Threads.@threads for p = 1:2^13
-# for p = 1:2^13
-    println(count(ev.==0.0))
-    
-    EV_win = 0.0
-    EV_tie = 0.0
-    for o = 1:2^13
-        my_score = SCORE_MAT[p,o]
-        chance_this_o  = OUTCOME_PROBS[o]
-
-        #Chance I win = probability that nobody is in anything higher than me
-        picks_I_beat = my_score .>  SCORE_MAT[:,o]
-        p_beat_players = [sum(pp[picks_I_beat]) for pp in PICK_PROBS]
-        chance_I_win = prod(p_beat_players) #Need to beat all the people to win
-        EV_win += chance_I_win * chance_this_o
-
-        #Chance I tie 
-        picks_I_tie = my_score .==  SCORE_MAT[:,o]
-        p_tie_players = [sum(pp[picks_I_tie]) for pp in PICK_PROBS]
-        picks_I_lose = my_score .<  SCORE_MAT[:,o]
-        p_lose_players = [sum(pp[picks_I_lose]) for pp in PICK_PROBS]
-        chance_I_lose = 1. - prod(1.0 .- p_lose_players)
-
-
-        #What are chances I tie one and beat all the others?
-        p_tie_one = 0.0
-        for i in 1:length(p_beat_players)
-            if p_beat_players[i] > 0
-                p_tie_one += p_tie_players[i] * prod(p_beat_players)/p_beat_players[i]
-            end
-        end
-
-        p_tie_two = 0.0
-        for i in 1:length(p_beat_players)
-            for j in i+1:length(p_beat_players)
-                if p_beat_players[i] > 0 && p_beat_players[j] > 0
-                    p_tie_two += p_tie_players[i] * p_tie_players[j] * prod(p_beat_players)/p_beat_players[i]/p_beat_players[j]
-                end
-            end
-        end
-
-        p_tie_three = 0.0
-        for i in 1:length(p_beat_players)
-            for j in i+1:length(p_beat_players)
-                for k in j+1:length(p_beat_players)
-                    if p_beat_players[i] > 0 && p_beat_players[j] > 0 && p_beat_players[k] > 0
-                        p_tie_three += p_tie_players[i] * p_tie_players[j] * p_tie_players[k] * prod(p_beat_players)/p_beat_players[i]/p_beat_players[j]/p_beat_players[k]
-                    end
-                end
-            end
-        end
-
-        EV_tie += (p_tie_one/2 + p_tie_two/3 + p_tie_three/4) * chance_this_o
-
-    end
-    ev[p] = EV_win + EV_tie
-end
-writedlm("ev.csv",  ev, ',')
-plot(ev)
-
-
-println("Best chance of winning: ", round(maximum(ev)*100, digits=2), "%")
-idx = argmax(ev)
-lr = get_lr(idx)
-branch = get_branch(lr)
-
-println("Make these picks: ")
-for (d,g) in zip(lr,branch)
-    t1 = TEAMS[PLAYOFFS[g][1]][1]
-    t2 = TEAMS[PLAYOFFS[g][2]][1]
-    if d 
-        println(t1, " ", round(GAME_PROBS[g]*100),"% over ", t2, " ", round((1-GAME_PROBS[g])*100), "%")
-    else
-        println(t2, " ", round((1-GAME_PROBS[g])*100), "% over ", t1, " ", round(GAME_PROBS[g]*100), "%")
-    end
-end
-
-idxs = reverse(sortperm(ev))[1:3]
-for idx in idxs
-    println("Chance of winning: ", round(ev[idx]*100, digits=2), "%")
-    
-    lr = get_lr(idx)
-    branch = get_branch(lr)
-
-    println("Make these picks: ")
-    for (d,g) in zip(lr,branch)
-        t1 = TEAMS[PLAYOFFS[g][1]][1]
-        t2 = TEAMS[PLAYOFFS[g][2]][1]
-        if d 
-            println(t1, " ", Int(round(GAME_PROBS[g]*100)),"% over ", t2, " ", Int(round((1-GAME_PROBS[g])*100)), "%")
-        else
-            println(t2, " ", Int(round((1-GAME_PROBS[g])*100)), "% over ", t1, " ", Int(round(GAME_PROBS[g]*100)), "%")
-        end
-    end
-end
-
-
-
-get_game_prob(11, 12, 3)
-## Check against https://projects.fivethirtyeight.com/2021-nfl-predictions/
-# 1  => ("TEN", 1590, (36.166461, -86.771289)),
-# 2  => (" KC", 1689, (39.048914, -94.484039)),
-# 3  => ("BUF", 1637, (42.773739, -78.786978)),
-# 4  => ("CIN", 1570, (39.095442, -84.516039)),
-# 5  => (" LV", 1480, (37.751411,-122.200889)),
-# 6  => ("NE",  1571, (42.090925, -71.264350)),
-# 7  => ("PIT", 1486, (40.446786, -80.015761)),
-
-# 11 => (" GB", 1680, (44.501306, -88.062167)),
-# 12 => (" TB", 1654, (27.975967, -82.503350)),
-# 13 => ("DAL", 1636, (32.747778, -97.092778)),
-# 14 => ("LAR", 1591, (38.632975, -90.188547)),
-# 15 => ("ARI", 1523, (33.527700,-112.262608)),
-# 16 => (" SF", 1580, (37.713486,-122.386256)),
-# 17 => ("PHI", 1508, (39.900775, -75.167453)),
-
-# sum([OUTCOME_PROBS[i] for i in 1:2^13 if get_winners(i)[end]==7])
 
 
 # Get likelihood of outcomes given starting at game i - return a 2^13 vector with all outcomes (many of which may be 0)
@@ -918,25 +641,3 @@ end
 # read_back = JSON.parsefile("test.json")
 
 
-
-
-PICK_NUMS
-
-AK_PROBS = PICK_PROBS[3]
-AK_PICK = 2049
-AK_PROBS[AK_PICK]
-count(AK_PROBS.>AK_PROBS[AK_PICK])
-idx_sort = sortperm(AK_PROBS, rev=true)
-idx_sort[AK_PICK]
-
-
-pick_nums = [1,2,3,5,6,7,9,10]
-pred_nums = [3,7,2,5,6,1,4,9]
-
-println("Name", " ", "bracket_rank", " ", "bracket_prob", " ")
-for (pick,prob) in zip(PICKS[pick_nums], PICK_PROBS[pred_nums])
-    num = get_pick_branch(pick[2])
-    branch_rank = count(prob.>prob[num])
-    branch_prob = prob[num]
-    println(pick[1], ": ", branch_rank, " ", branch_prob*100, " ", num)
-end
