@@ -126,44 +126,90 @@
 
 
 
-#2024
+# #2024
+# # Who made it to playoffs, and how good are they?
+# TEAMS = Dict(
+#     1  => ("BAL", 1610,    (39.277969, -76.622767)),#1704 1529
+#     2  => ("BUF", 1697,    (42.773739, -78.786978)),#1679 1697
+#     3  => ( "KC", 1615,    (39.048914, -94.484039)),#1621 1615
+#     4  => ("HOU", 1492,    (29.684456, -95.410729)),#1479 1492
+#     5  => ("CLE", 1512,    (41.505885, -81.699773)),#1537 1512
+#     6  => ("MIA", 1611,    (25.956799, -80.240191)),#1574 1611
+#     7  => ("PIT", 1552,    (40.444805, -80.016026)),#1563 1552
+ 
+#     11 => ( "SF", 1631,    (37.713486,-122.386256)),#1704 1631
+#     12 => ("DAL", 1691,    (32.747778, -97.092778)),#1650 1691
+#     13 => ("DET", 1607,    (42.338809, -83.044423)),#1594 1607
+#     14 => ( "TB", 1436,    (27.975967, -82.503350)),#1519 1436
+#     15 => ("PHI", 1546,    (39.900775, -75.167453)),#1554 1546
+#     16 => ("LAR", 1571,    (38.632975, -90.188547)),#1536 1571
+#     17 => ( "GB", 1519,    (44.501306, -88.062167)),#1554 1519
+# )
+
+# # Where is superbowl played?
+# SUPERBOWL_LOC = (36.089271, -115.182872)
+
+
+# # What were the picks people made?
+# PICKS = [
+#     ("Akhil", ["DAL", "LAR",  "TB", "BUF",  "KC", "CLE", "LAR", "DAL", "BUF", "BAL", "DAL", "BAL", "BAL"]),
+#     ("Steve", ["DAL", "LAR", "PHI", "BUF", "MIA", "CLE",  "SF", "DAL", "CLE", "BAL", "DAL", "BAL", "DAL"]),
+#     ("David", [ "GB", "DET", "PHI", "BUF",  "KC", "CLE", "DET",  "GB", "BUF", "BAL", "DET", "BUF", "BUF"]),
+#     ("Jacob", ["DAL", "DET", "PHI", "BUF",  "KC", "CLE",  "SF", "DAL", "BUF", "BAL",  "SF", "BAL",  "SF"]),
+#     ("Ben",   ["DAL", "DET",  "TB", "BUF",  "KC", "HOU",  "SF", "DET", "BUF", "BAL",  "SF", "BAL", "BAL"]),
+#     ("Dustin",["DAL", "LAR",  "TB", "BUF",  "KC", "HOU",  "SF", "DAL", "BUF", "BAL",  "SF", "BUF",  "SF"]),
+#     ("Erin",  ["DAL", "DET", "PHI", "BUF", "MIA", "HOU",  "SF", "DET", "BUF", "BAL", "DET", "BAL", "BAL"]),
+#     ("Sean",  ["DAL", "LAR",  "TB", "BUF",  "KC", "CLE",  "SF", "DAL",  "KC", "BAL", "DAL",  "KC", "DAL"]),
+#     ("Guim",  ["DAL", "LAR",  "TB", "BUF",  "KC", "CLE",  "SF", "DAL",  "KC", "BAL",  "SF", "BAL",  "SF"]),
+#     ("Mo",    ["DAL", "LAR",  "TB", "BUF",  "KC", "CLE",  "SF", "DAL",  "KC", "BAL",  "SF",  "KC",  "KC"]),
+#     ("Eric",  ["DAL", "LAR",  "TB", "BUF", "MIA", "CLE",  "SF", "DAL", "BUF", "BAL", "DAL", "BAL", "DAL"]),
+#     ("Annie*",["DAL", "DET", "PHI", "BUF", "MIA", "HOU", "PHI", "DET", "BUF", "MIA", "DET", "MIA", "MIA"]),
+# ]
+
+
+
+#2025
 # Who made it to playoffs, and how good are they?
 TEAMS = Dict(
-    1  => ("BAL", 1610,    (39.277969, -76.622767)),#1704 1529
-    2  => ("BUF", 1697,    (42.773739, -78.786978)),#1679 1697
-    3  => ( "KC", 1615,    (39.048914, -94.484039)),#1621 1615
-    4  => ("HOU", 1492,    (29.684456, -95.410729)),#1479 1492
-    5  => ("CLE", 1512,    (41.505885, -81.699773)),#1537 1512
-    6  => ("MIA", 1611,    (25.956799, -80.240191)),#1574 1611
-    7  => ("PIT", 1552,    (40.444805, -80.016026)),#1563 1552
- 
-    11 => ( "SF", 1631,    (37.713486,-122.386256)),#1704 1631
-    12 => ("DAL", 1691,    (32.747778, -97.092778)),#1650 1691
-    13 => ("DET", 1607,    (42.338809, -83.044423)),#1594 1607
-    14 => ( "TB", 1436,    (27.975967, -82.503350)),#1519 1436
-    15 => ("PHI", 1546,    (39.900775, -75.167453)),#1554 1546
-    16 => ("LAR", 1571,    (38.632975, -90.188547)),#1536 1571
-    17 => ( "GB", 1519,    (44.501306, -88.062167)),#1554 1519
+    1  => ( "KC", 1582,    (39.048914, -94.484039)),
+    2  => ("BUF", 1576,    (42.773739, -78.786978)),
+    3  => ("BAL", 1609,    (39.277969, -76.622767)),
+    4  => ("HOU", 1502,    (29.684456, -95.410729)),
+    5  => ("LAC", 1539,    (33.952815, -118.34030)),
+    6  => ("PIT", 1507,    (40.444805, -80.016026)),
+    7  => ("DEN", 1563,    (39.743550, -105.02014)),
+
+    11 => ("DET", 1613,    (42.338809, -83.044423)),
+    12 => ("PHI", 1570,    (39.900775, -75.167453)),
+    13 => ( "TB", 1557,    (27.975967, -82.503350)),
+    14 => ("LAR", 1509,    (38.632975, -90.188547)),
+    15 => ("MIN", 1546,    (44.973805, -93.259297)),
+    16 => ("WSH", 1514,    (38.907697, -76.864517)),
+    17 => ( "GB", 1565,    (44.501306, -88.062167)),
 )
 
+
 # Where is superbowl played?
-SUPERBOWL_LOC = (36.089271, -115.182872)
+SUPERBOWL_LOC = (29.950875054342415, -90.08093306693422)
 
 
 # What were the picks people made?
 PICKS = [
-    ("Akhil" , [ "HOU", "KC", "BUF", "DAL", "DET", "PHI",  "BAL",  "SF", "DAL",  "BUF", "SF", "BAL", "BAL"]),
-    ("Steve" , [ "HOU", "KC", "BUF", "DAL", "DET", "PHI",  "BAL",  "SF", "DAL",  "BUF", "SF", "BAL", "SF"]),
-    # ("Dustin", [ "TB", "SF", "ARI", "KC", "BUF", "CIN",  "GB", "ARI", "TEN",  "KC", "GB",  "KC",  "GB"]),
-    # ("Jacob" , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB",  "TB", "TEN",  "KC", "GB", "TEN",  "GB"]),
-    # ("Ben"   , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB", "DAL", "TEN", "BUF", "GB", "TEN",  "GB"]),
-    # ("Eric"  , [ "TB","DAL", "LAR", "KC", "BUF", "CIN",  "GB", "DAL", "CIN", "BUF", "GB", "BUF", "BUF"]),
-    # ("Mo"    , [ "TB","DAL", "LAR", "KC",  "NE", "CIN",  "GB",  "TB", "TEN",  "KC", "GB",  "KC",  "KC"]),
-    # ("Drew"  , [ "TB","DAL", "ARI", "KC",  "NE",  "LV",  "GB",  "TB",  "NE",  "KC", "TB",  "KC",  "KC"]),
-    # ("David" , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB", "LAR", "TEN", "BUF","LAR", "BUF", "BUF"]),
-    # ("Sean"  , [ "TB","DAL", "LAR", "KC", "BUF",  "LV",  "GB",  "TB", "TEN", "BUF", "GB", "TEN",  "GB"]),
-    # ("Guim"  , [ "TB", "SF", "LAR", "KC", "BUF", "CIN",  "GB", "LAR", "TEN", "BUF", "GB", "BUF",  "GB"]),
+    ("Akhil",   ["PHI",  "TB", "LAR", "BUF", "BAL", "LAC", "PHI", "DET", "BAL",  "KC", "PHI",  "KC",  "KC"]),
+    ("Steve",   [ "GB",  "TB", "MIN", "DEN", "BAL", "LAC",  "TB", "DET", "LAC",  "KC", "DET",  "KC", "DET"]),
+    ("David",   ["PHI", "WSH", "MIN", "BUF", "BAL", "LAC", "WSH", "MIN", "BUF", "LAC", "WSH", "BUF", "BUF"]),
+    ("Jacob",   ["PHI", "WSH", "MIN", "BUF", "BAL", "LAC", "MIN", "DET", "BAL", "LAC", "DET", "BAL", "DET"]),
+    ("Ben",     ["PHI",  "TB", "MIN", "BUF", "BAL", "LAC", "PHI", "DET", "BAL", "LAC", "PHI", "BAL", "PHI"]),
+    ("Dustin",  ["PHI", "WSH", "LAR", "BUF", "BAL", "HOU", "PHI", "DET", "BAL",  "KC", "PHI", "BAL", "BAL"]),
+    ("Erin",    ["PHI",  "TB", "MIN", "BUF", "BAL", "LAC", "PHI", "DET", "BUF",  "KC", "DET", "BUF", "BUF"]),
+    ("Sean",    ["PHI", "WSH", "MIN", "BUF", "BAL", "LAC", "PHI", "DET", "BUF",  "KC", "DET", "BUF", "BUF"]),
+    ("Annie",   ["PHI", "WSH", "LAR", "BUF", "BAL", "HOU", "LAR", "DET", "BAL",  "KC", "DET",  "KC", "DET"]),
+    ("Mo",      ["PHI", "WSH", "MIN", "BUF", "BAL", "HOU", "MIN", "DET", "BUF",  "KC", "DET",  "KC",  "KC"]),
+    ("Bens_Dad",["PHI", "WSH", "MIN", "BUF", "BAL", "LAC", "PHI", "DET", "BUF",  "KC", "DET", "BUF", "DET"]),
+    ("Eleanor", [ "GB",  "TB", "LAR", "BUF", "BAL", "LAC", "LAR", "DET", "BAL", "LAC", "DET", "LAC", "DET"]),
+    ("Eric",    ["PHI",  "TB", "LAR", "BUF", "BAL", "LAC", "PHI", "LAR", "BAL",  "KC", "PHI", "BAL", "BAL"]),
 ]
+
 
 # Who has played and won their games already?
 WINS = []
@@ -201,6 +247,7 @@ function get_teams(game_i, T)
 
     elseif game_i < 2^3
         # return (14,15)
+        # return (12,17)
         # return (12,17)
         return (2,7)
 
@@ -504,7 +551,7 @@ function get_score(pick,real)
 end
 
 function get_score_mat()
-    if isfile("score_matrixkkk.csv")
+    if false #isfile("score_matrix.csv")
         score_mat = readdlm("score_matrix.csv", ',', Int)
     else
         score_mat = zeros(Int, 2^13, 2^13)
@@ -522,7 +569,8 @@ function get_score_mat()
 end
 
 SCORE_MAT = get_score_mat()
-#writedlm( "score_matrix.csv",  SCORE_MAT, ',')
+# writedlm( "score_matrix.csv",  SCORE_MAT, ",")
+
 dat = Dict()
 V = []
 for i in 1:8192
