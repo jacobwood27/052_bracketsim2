@@ -677,6 +677,8 @@ function make_big_dic()
 
     BIG_DIC["picks"] = PICKS
 
+    BIG_DIC["decided"] = Dict()
+
     BIG_DIC
 end
 
